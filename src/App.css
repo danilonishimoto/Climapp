@@ -25,3 +25,10 @@
   display: block;
   text-align: center;
 }
+
+.forecast-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

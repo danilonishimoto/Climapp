@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  padding: 32px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  max-height: 152px;
+}
+
+.head {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherIcon {
+  max-width: 60px;
+  max-height: 60px;
+}
+
+.temp {
+  align-self: stretch;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
