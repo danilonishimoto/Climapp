@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <SearchBar />
+      <SearchBar setCity={setCity}/>
       {showData ? (
         <>
           <h1>
