@@ -1,6 +1,7 @@
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
 import ForecastCard from "./components/ForecastCard";
+import LoadingSpinner from "./LoadingSpinner";
 import "./App.css"
 import { useEffect, useState, useMemo } from "react";
 import { fetchState } from "./actions/fetchState";
@@ -12,13 +13,18 @@ function App() {
   const [forecast, setForecast] = useState([])
   const [city, setCity] = useState("São Paulo");
   const [state, setState] = useState("SP");
+  const [loading, setLoading] = useState(false)
+
+  const showData = !loading && weather
 
   useEffect(() => {
     async function loadState() {
       try {
+        setLoading(true)
         const data = await fetchState(city);
         if (data) {
           setState(data);
+          setLoading(false)
         }
       } catch (error) {
         console.log(error);
@@ -31,6 +37,7 @@ function App() {
   useEffect(() => {
     async function fetchWeather() {
       try {
+        setLoading(true)
         const response = await fetch(
           `https://api.hgbrasil.com/weather?format=json-cors&key=${API_KEY}&city_name=${city}`,
         );
@@ -40,6 +47,7 @@ function App() {
           setWeather(data.results);
           const nextDays = data.results.forecast.slice(1, 4);
           setForecast(nextDays) 
+          setLoading(false)
         }
       } catch (error) {
         console.log("Erro ao buscar dados da API", error);
@@ -52,20 +60,20 @@ function App() {
   return (
     <div className="app-container">
       <SearchBar />
-      {weather && (
+      {showData ? (
         <>
           <h1>
             {city}, {state}
           </h1>
           <WeatherCard weather={weather} />
           <div className="forecast-container">
-            <ForecastCard weather={forecast[0]} date={'Amanhã'}/>
+            <ForecastCard weather={forecast[0]} weekday={'Amanhã'}/>
             {forecast.length > 2 ? <ForecastCard weather={forecast[1]}/> : <></>}
             {forecast.length > 3 ? <ForecastCard weather={forecast[2]}/> : <></>}
           </div>
           <button onClick={() => setCity('Rio de Janeiro')}>Teste</button>
         </>
-      )}
+      ) : <LoadingSpinner/>}
     </div>
   );
 }

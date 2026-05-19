@@ -1,10 +1,11 @@
 import styles from './forecast.card.module.css'
+import { formatWeekday } from '../../utils/formatWeekday'
 
-const ForecastCard = ({ weather, date }) => {
+const ForecastCard = ({ weather, weekday }) => {
   return (
     <div className={styles.container}>
       <div className={styles.head}>
-        <p>{date}</p>
+        <p>{formatWeekday(weekday)}</p>
         <p>{weather?.date}</p>
       </div>
       <img className={styles.weatherIcon} src={`./icons-weather/${weather?.condition}.svg`}/>
