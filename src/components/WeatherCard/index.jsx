@@ -5,7 +5,7 @@ const WeatherCard = ({weather}) => {
     <section className="weather-card">
       <p className="date">Hoje ({weather.forecast[0].date})</p>
       <p className="sun-position">Nascer do sol: {weather.sunrise} | Pôr dos sol: {weather.sunset}</p>
-      <img src={`./icons-weather/${weather.condition_slug}.svg`} 
+      <img src={weather.condition_slug ? `./icons-weather/${weather.condition_slug}.svg` : `./icons-weather/fallback.svg`} 
       alt={weather.description}/>
       <h2 className="temperature">{weather.temp}°</h2>
       <p className="condition">{weather.description}</p>
