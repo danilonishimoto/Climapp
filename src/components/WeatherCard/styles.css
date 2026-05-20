@@ -41,3 +41,11 @@
   gap: 8px;
   align-items: center;
 }
+
+.date {
+  font-weight: 600;
+}
+
+.sun-position {
+  font-size: 12px;
+}
